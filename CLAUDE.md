@@ -48,5 +48,5 @@ npm run dev:client   # Next.js on :3000
 - Tailwind for all styling, no component libraries
 - No auth (out of scope)
 - Color palette: orange accent (#F97316), dark text (#1F2937), light gray bg (#F3F4F6)
-- Sidebar: 240px fixed width on desktop
+- Sidebar: 320px floating card on desktop (w-80 wrapper with p-3 padding)
 - Mobile: bottom tab nav, no sidebar

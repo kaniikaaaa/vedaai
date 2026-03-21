@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Bell, LayoutGrid, ChevronDown } from 'lucide-react';
+import { APP_CONFIG } from '@/lib/constants';
 
 export default function TopBar() {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function TopBar() {
         </button>
         <div className="flex items-center gap-2">
           <img src="/user-avatar.svg" alt="User" className="w-8 h-8 rounded-full object-cover" />
-          <span className="text-sm font-medium text-gray-700">John Doe</span>
+          <span className="text-sm font-medium text-gray-700">{APP_CONFIG.userName}</span>
           <ChevronDown className="w-4 h-4 text-gray-400" />
         </div>
       </div>

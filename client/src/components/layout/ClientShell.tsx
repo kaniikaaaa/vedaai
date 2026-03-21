@@ -20,7 +20,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
           {children}
         </main>
       </div>
-      <MobileBottomNav />
+      {!isPaperPage && <MobileBottomNav />}
     </>
   );
 }
