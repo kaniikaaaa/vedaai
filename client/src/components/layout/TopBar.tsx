@@ -8,9 +8,9 @@ export default function TopBar() {
   const router = useRouter();
 
   return (
-    <header className="hidden lg:flex h-14 bg-white border-b border-gray-200 items-center justify-between px-6 sticky top-0 z-20">
+    <header className="hidden lg:flex h-14 bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm items-center justify-between px-5 sticky top-3 z-20 mx-3 mt-3">
       <div className="flex items-center gap-3">
-        <button onClick={() => router.back()} className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
+        <button onClick={() => router.back()} className="p-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow">
           <ArrowLeft className="w-5 h-5 text-gray-600" />
         </button>
         <div className="flex items-center gap-2 text-gray-500">
@@ -20,14 +20,14 @@ export default function TopBar() {
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="p-2 hover:bg-gray-100 rounded-lg relative">
+        <button className="p-2 bg-white rounded-full shadow-sm hover:shadow transition-shadow relative">
           <Bell className="w-5 h-5 text-gray-600" />
         </button>
-        <div className="flex items-center gap-2">
-          <img src="/user-avatar.svg" alt="User" className="w-8 h-8 rounded-full object-cover" />
+        <button className="flex items-center gap-2 bg-white rounded-full pl-1.5 pr-3 py-1.5 shadow-sm hover:shadow transition-shadow">
+          <img src="/user-avatar.svg" alt="User" className="w-7 h-7 rounded-full object-cover" />
           <span className="text-sm font-medium text-gray-700">{APP_CONFIG.userName}</span>
           <ChevronDown className="w-4 h-4 text-gray-400" />
-        </div>
+        </button>
       </div>
     </header>
   );
