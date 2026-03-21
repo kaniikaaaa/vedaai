@@ -14,7 +14,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     <>
       {!isPaperPage && <Sidebar />}
       <MobileTopBar />
-      <div className={isPaperPage ? 'min-h-screen flex flex-col' : 'lg:ml-60 min-h-screen flex flex-col'}>
+      <div className={isPaperPage ? 'min-h-screen flex flex-col' : 'lg:ml-80 min-h-screen flex flex-col'}>
         {!isPaperPage && <TopBar />}
         <main className="flex-1 pb-16 lg:pb-0">
           {children}
