@@ -19,6 +19,7 @@ export interface Section {
 }
 
 export interface GeneratedPaper {
+  title: string;
   schoolName: string;
   subject: string;
   class: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Filter, Plus } from 'lucide-react';
+import { Search, Filter, Plus, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import type { Assignment } from '@/types';
 import AssignmentCard from './AssignmentCard';
@@ -27,8 +27,10 @@ export default function AssignmentList({
 
   const filtered = assignments.filter(a => {
     if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
     const text = (a.additionalInstructions || '').toLowerCase();
-    return text.includes(searchQuery.toLowerCase());
+    const title = (a.generatedPaper?.title || '').toLowerCase();
+    return text.includes(q) || title.includes(q);
   });
 
   const handleDelete = async () => {
@@ -51,9 +53,10 @@ export default function AssignmentList({
 
       {/* Toolbar */}
       <div className="flex items-center justify-between gap-4 mb-6">
-        <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 px-3 py-2 border border-gray-200 rounded-lg">
+        <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 px-3 py-2 border border-gray-200 rounded-lg bg-white">
           <Filter className="w-4 h-4" />
           Filter by
+          <ChevronDown className="w-3 h-3 text-gray-400" />
         </button>
         <div className="relative flex-1 max-w-xs">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -89,8 +92,8 @@ export default function AssignmentList({
         </div>
       )}
 
-      {/* Create Assignment FAB (mobile) */}
-      <div className="fixed bottom-20 left-0 right-0 flex justify-center lg:hidden z-20">
+      {/* Floating Create Assignment Button - visible on BOTH desktop and mobile */}
+      <div className="fixed bottom-20 lg:bottom-6 left-0 right-0 flex justify-center z-20">
         <Link
           href="/create"
           className="flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium text-sm shadow-lg transition-colors"

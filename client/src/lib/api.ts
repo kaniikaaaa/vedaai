@@ -32,7 +32,7 @@ export async function createAssignment(formData: FormData): Promise<Assignment> 
 }
 
 export async function deleteAssignment(id: string): Promise<void> {
-  await fetch(`${API_URL}/assignments/${id}`, { method: 'DELETE' });
+  await request(`/assignments/${id}`, { method: 'DELETE' });
 }
 
 export async function regenerateAssignment(id: string): Promise<Assignment> {

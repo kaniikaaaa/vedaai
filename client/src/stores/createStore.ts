@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import type { QuestionTypeConfig } from '@/types';
 
+const getToday = () => new Date().toISOString().split('T')[0];
+
 const DEFAULT_QUESTION_TYPES: QuestionTypeConfig[] = [
   { type: 'Multiple Choice Questions', count: 4, marks: 1 },
   { type: 'Short Questions', count: 3, marks: 2 },
@@ -30,7 +32,7 @@ interface CreateStore {
 
 export const useCreateStore = create<CreateStore>((set, get) => ({
   file: null,
-  dueDate: '',
+  dueDate: getToday(),
   questionTypes: [...DEFAULT_QUESTION_TYPES],
   additionalInstructions: '',
   isSubmitting: false,
@@ -61,7 +63,7 @@ export const useCreateStore = create<CreateStore>((set, get) => ({
 
   reset: () => set({
     file: null,
-    dueDate: '',
+    dueDate: getToday(),
     questionTypes: [...DEFAULT_QUESTION_TYPES],
     additionalInstructions: '',
     isSubmitting: false,

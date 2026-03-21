@@ -7,6 +7,7 @@ Your output must be a valid JSON object with exactly this structure:
 {
   "message": "A brief friendly message about the generated paper (1-2 sentences)",
   "paper": {
+    "title": "A short title for the paper (e.g., 'Quiz on Electricity', 'Math Unit Test')",
     "schoolName": "School name (infer from context or use a reasonable default)",
     "subject": "Subject name (infer from the content/instructions)",
     "class": "Class/Grade (infer from context)",

@@ -1,5 +1,3 @@
-'use client';
-
 interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;

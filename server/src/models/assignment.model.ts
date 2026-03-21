@@ -42,6 +42,7 @@ const AnswerKeySchema = new Schema({
 }, { _id: false });
 
 const GeneratedPaperSchema = new Schema({
+  title: String,
   schoolName: String,
   subject: String,
   class: String,

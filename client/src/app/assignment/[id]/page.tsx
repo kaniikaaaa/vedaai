@@ -10,6 +10,7 @@ import PaperView from '@/components/paper/PaperView';
 import GeneratingState from '@/components/paper/GeneratingState';
 import Skeleton from '@/components/ui/Skeleton';
 import * as api from '@/lib/api';
+import VedaLogo from '@/components/ui/VedaLogo';
 import type { Assignment } from '@/types';
 
 export default function AssignmentDetailPage() {
@@ -89,9 +90,12 @@ export default function AssignmentDetailPage() {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-3.5rem)]">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       {/* Left Panel - AI Message */}
       <div className="lg:w-80 xl:w-96 bg-gray-900 text-white p-6 flex-shrink-0">
+        <div className="mb-6"><VedaLogo textColor="text-white" /></div>
+
+        {/* AI Message */}
         <div className="flex items-start gap-3 mb-4">
           <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
             <Sparkles className="w-4 h-4 text-white" />
