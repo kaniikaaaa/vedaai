@@ -21,16 +21,16 @@ export default function Sidebar() {
   const assignmentCount = useAssignmentStore(s => s.assignments.length);
 
   return (
-    <div className="hidden lg:block fixed left-0 top-0 h-screen w-80 p-3 z-30">
+    <div className="hidden lg:block fixed left-0 top-0 h-screen w-72 p-3 z-30">
       <aside className="flex flex-col h-full bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="px-5 py-5">
           <VedaLogo />
         </div>
 
-        <div className="px-4 mb-4">
+        <div className="px-4 my-5">
           <Link
             href="/create"
-            className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium text-sm transition-colors border-2 border-orange-500"
+            className="flex items-center justify-center gap-2 w-full py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium text-xs transition-colors border-[3px] border-orange-500"
           >
             <Plus className="w-4 h-4" />
             Create Assignment
