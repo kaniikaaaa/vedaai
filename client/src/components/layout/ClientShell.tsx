@@ -12,7 +12,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       <MobileTopBar />
       <div className="lg:ml-[304px] min-h-screen flex flex-col">
         <TopBar />
-        <main className="flex-1 pb-20 lg:pb-0">
+        <main className="flex-1 pb-36 lg:pb-0">
           {children}
         </main>
         <MobileBottomNav />

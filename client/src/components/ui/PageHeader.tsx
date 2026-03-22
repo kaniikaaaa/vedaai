@@ -5,12 +5,15 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle }: PageHeaderProps) {
   return (
-    <div className="mb-6">
-      <div className="flex items-center gap-2 mb-1">
-        <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-        <h1 className="text-xl font-bold text-gray-900">{title}</h1>
+    <div className="flex items-center gap-3 px-2 mb-4">
+      <div
+        className="w-3 h-3 bg-[#4BC26D] rounded-full border-4 border-[#4BC26D66] flex-shrink-0"
+        style={{ boxShadow: '0px 16px 48px rgba(0, 0, 0, 0.12), 0px 32px 48px rgba(0, 0, 0, 0.2)' }}
+      />
+      <div>
+        <h1 className="text-xl font-bold text-[#303030] tracking-[-0.04em]">{title}</h1>
+        <p className="text-sm text-[#5E5E5E8C] tracking-[-0.04em]">{subtitle}</p>
       </div>
-      <p className="text-sm text-gray-500 ml-5">{subtitle}</p>
     </div>
   );
 }

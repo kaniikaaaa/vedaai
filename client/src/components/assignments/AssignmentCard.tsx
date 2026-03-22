@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { MoreVertical } from 'lucide-react';
 import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
 import type { Assignment } from '@/types';
 
 interface AssignmentCardProps {
@@ -36,26 +35,43 @@ export default function AssignmentCard({ assignment, onDelete }: AssignmentCardP
   const dueDate = format(new Date(assignment.dueDate), 'dd-MM-yyyy');
 
   return (
-    <div className={cn('rounded-xl p-5 hover:shadow-md transition-all relative', menuOpen ? 'bg-amber-50 border-2 border-amber-400' : 'bg-white border border-gray-100')}>
+    <div className="bg-white rounded-3xl p-6 hover:shadow-md transition-all relative">
       <div className="flex items-start justify-between">
-        <h3 className="text-base font-semibold text-gray-900 cursor-pointer hover:text-orange-600 transition-colors pr-8" onClick={() => router.push(`/assignment/${assignment._id}`)}>
+        <h3
+          className="text-2xl font-extrabold leading-[120%] tracking-[-0.04em] text-[#303030] cursor-pointer hover:text-[#FF5623] transition-colors pr-8"
+          onClick={() => router.push(`/assignment/${assignment._id}`)}
+        >
           {title}
         </h3>
         <div className="relative" ref={menuRef}>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 hover:bg-gray-100 rounded-lg transition-colors">
-            <MoreVertical className="w-5 h-5 text-gray-400" />
+          <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 hover:bg-[#F0F0F0] rounded-lg transition-colors">
+            <MoreVertical className="w-6 h-6 text-[#A9A9A9]" />
           </button>
           {menuOpen && (
-            <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-10 min-w-[140px]">
-              <button onClick={() => { setMenuOpen(false); router.push(`/assignment/${assignment._id}`); }} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">View Assignment</button>
-              <button onClick={() => { setMenuOpen(false); onDelete(assignment._id); }} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Delete</button>
+            <div
+              className="absolute right-0 top-10 bg-white rounded-2xl py-2 z-10 min-w-[140px]"
+              style={{ boxShadow: '0px 16px 48px rgba(0, 0, 0, 0.2), 0px 32px 48px rgba(0, 0, 0, 0.05)' }}
+            >
+              <button
+                onClick={() => { setMenuOpen(false); router.push(`/assignment/${assignment._id}`); }}
+                className="w-full text-left px-4 py-2 text-sm font-medium text-[#303030] hover:bg-[#F0F0F0] rounded-lg tracking-[-0.04em]"
+              >
+                View Assignment
+              </button>
+              <button
+                onClick={() => { setMenuOpen(false); onDelete(assignment._id); }}
+                className="w-full text-left px-4 py-2 text-sm font-medium text-[#C53535] bg-[#F6F6F6] hover:bg-[#EEEEEE] rounded-lg tracking-[-0.04em]"
+              >
+                Delete
+              </button>
             </div>
           )}
         </div>
       </div>
-      <div className="flex items-center gap-4 mt-4 text-[13px] text-gray-500">
-        <span>Assigned on: {assignedDate}</span>
-        <span>Due: {dueDate}</span>
+
+      <div className="flex items-center justify-between mt-10 text-base text-[#303030] tracking-[-0.04em]">
+        <span><strong>Assigned on :</strong> {assignedDate}</span>
+        <span><strong>Due :</strong> {dueDate}</span>
       </div>
     </div>
   );

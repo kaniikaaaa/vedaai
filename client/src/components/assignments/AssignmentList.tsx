@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Filter, Plus, ChevronDown } from 'lucide-react';
+import { Search, Filter, Plus } from 'lucide-react';
 import Link from 'next/link';
 import type { Assignment } from '@/types';
 import AssignmentCard from './AssignmentCard';
@@ -45,21 +45,22 @@ export default function AssignmentList({
     <div className="p-4 lg:p-6">
       <PageHeader title="Assignments" subtitle="Manage and create assignments for your classes." />
 
-      {/* Toolbar */}
-      <div className="flex items-center justify-between gap-4 mb-6">
-        <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 px-3 py-2 border border-gray-200 rounded-lg bg-white">
-          <Filter className="w-4 h-4" />
-          Filter by
-          <ChevronDown className="w-3 h-3 text-gray-400" />
-        </button>
-        <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+      {/* Search/Filter Bar */}
+      <div className="bg-white rounded-[20px] h-16 flex items-center justify-between px-4 gap-6 mb-4">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
+            <Filter className="w-5 h-5 text-[#A9A9A9]" />
+            <span className="text-sm font-bold text-[#A9A9A9] tracking-[-0.04em]">Filter By</span>
+          </div>
+        </div>
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#A9A9A9]" />
           <input
             type="text"
             placeholder="Search Assignment"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full pl-12 pr-4 py-2.5 text-sm font-bold text-[#303030] placeholder:text-[#A9A9A9] placeholder:font-bold border border-black/20 rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF5623] focus:border-transparent tracking-[-0.04em]"
           />
         </div>
       </div>
@@ -68,9 +69,9 @@ export default function AssignmentList({
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="bg-white rounded-xl p-5 border border-gray-100">
-              <Skeleton className="h-5 w-3/4 mb-4" />
-              <Skeleton className="h-4 w-1/2" />
+            <div key={i} className="bg-white rounded-3xl p-6">
+              <Skeleton className="h-7 w-3/4 mb-10" />
+              <Skeleton className="h-5 w-full" />
             </div>
           ))}
         </div>
@@ -86,13 +87,14 @@ export default function AssignmentList({
         </div>
       )}
 
-      {/* Floating Create Assignment Button - visible on BOTH desktop and mobile */}
-      <div className="fixed bottom-20 lg:bottom-6 left-0 right-0 flex justify-center z-20">
+      {/* Floating Create Assignment Button */}
+      <div className="fixed bottom-32 lg:bottom-6 left-0 right-0 flex justify-center z-20">
         <Link
           href="/create"
-          className="flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium text-sm shadow-lg transition-colors"
+          className="flex items-center gap-1 px-6 py-3 bg-[#181818] hover:bg-[#272727] text-white rounded-[48px] font-medium text-base tracking-[-0.04em] transition-colors"
+          style={{ boxShadow: '0px 16px 48px rgba(0, 0, 0, 0.12), 0px 32px 48px rgba(0, 0, 0, 0.2)' }}
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-5 h-5" />
           Create Assignment
         </Link>
       </div>
