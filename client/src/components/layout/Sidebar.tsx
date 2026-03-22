@@ -33,7 +33,7 @@ export default function Sidebar() {
         <div className="mb-6">
           <button
             onClick={() => window.location.href = '/create'}
-            className="flex items-center justify-center gap-2 w-full py-2.5 text-base font-medium text-white rounded-full transition-colors tracking-[-0.04em]"
+            className="flex items-center justify-center gap-2 w-full py-2.5 text-base font-medium text-white rounded-full transition-colors tracking-[-0.04em] border-2 border-[#FF5623]"
             style={{
               background: '#272727',
               boxShadow: '0px 16px 48px rgba(255, 255, 255, 0.12), 0px 32px 48px rgba(255, 255, 255, 0.2), inset 0px -1px 3.5px rgba(177, 177, 177, 0.6), inset 0px 0px 34.5px rgba(255, 255, 255, 0.25)',

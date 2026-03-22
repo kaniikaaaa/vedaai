@@ -50,7 +50,7 @@ export default function AssignmentList({
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <Filter className="w-5 h-5 text-[#A9A9A9]" />
-            <span className="text-sm font-bold text-[#A9A9A9] tracking-[-0.04em]">Filter By</span>
+            <span className="text-sm font-normal lg:font-bold text-[#A9A9A9] tracking-[-0.04em]">Filter</span>
           </div>
         </div>
         <div className="relative flex-1 max-w-sm">
@@ -88,7 +88,7 @@ export default function AssignmentList({
       )}
 
       {/* Floating Create Assignment Button */}
-      <div className="fixed bottom-32 lg:bottom-6 left-0 right-0 flex justify-center z-20">
+      <div className="hidden lg:flex fixed lg:bottom-6 left-0 right-0 justify-center z-20">
         <Link
           href="/create"
           className="flex items-center gap-1 px-6 py-3 bg-[#181818] hover:bg-[#272727] text-white rounded-[48px] font-medium text-base tracking-[-0.04em] transition-colors"
