@@ -6,7 +6,7 @@ PORT="${PORT:-8080}"
 
 # Start MongoDB
 echo "Starting MongoDB..."
-mkdir -p /data/db
+mkdir -p /data/db /app/server/uploads
 mongod --dbpath /data/db --fork --logpath /var/log/mongod.log --bind_ip 127.0.0.1
 
 # Start Redis
