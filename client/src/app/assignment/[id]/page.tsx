@@ -88,38 +88,40 @@ export default function AssignmentDetailPage() {
   }
 
   return (
-    <div className="p-3 lg:p-4">
-      {/* Dark Banner */}
-      <div className="bg-gray-900 rounded-2xl p-5 mb-4 text-white">
-        <p className="text-sm text-gray-300 leading-relaxed mb-4">
-          {message || 'Here is your customized Question Paper based on your specifications.'}
-        </p>
-        <div className="flex gap-3">
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-900 bg-white rounded-full hover:bg-gray-100 transition-colors"
-          >
-            <Download className="w-4 h-4" />
-            Download as PDF
-          </button>
-          <button
-            onClick={handleRegenerate}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white border border-gray-600 rounded-full hover:bg-gray-800 transition-colors"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Regenerate PDF
-          </button>
+    <div className="p-3 lg:p-5">
+      <div className="bg-[#5E5E5E] rounded-[32px] p-5">
+        {/* Banner */}
+        <div className="bg-[#181818]/80 rounded-[32px] px-6 py-6 lg:px-8 mb-3">
+          <p className="text-xl font-bold text-white leading-[140%] tracking-[-0.04em] mb-4">
+            {message || 'Here is your customized Question Paper based on your specifications.'}
+          </p>
+          <div className="flex gap-4">
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-1 px-6 py-2.5 text-base font-medium text-[#303030] bg-white rounded-full hover:bg-[#F0F0F0] transition-colors tracking-[-0.04em]"
+            >
+              <Download className="w-6 h-6" />
+              Download as PDF
+            </button>
+            <button
+              onClick={handleRegenerate}
+              className="flex items-center gap-1 px-6 py-2.5 text-base font-medium text-white/60 hover:text-white transition-colors tracking-[-0.04em]"
+            >
+              <RefreshCw className="w-5 h-5" />
+              Regenerate
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Paper Content */}
-      {paper ? (
-        <PaperView paper={paper} />
-      ) : (
-        <div className="text-center py-20 text-gray-500">
-          No paper data available
-        </div>
-      )}
+        {/* Paper Content */}
+        {paper ? (
+          <PaperView paper={paper} />
+        ) : (
+          <div className="text-center py-20 text-white/50">
+            No paper data available
+          </div>
+        )}
+      </div>
     </div>
   );
 }
