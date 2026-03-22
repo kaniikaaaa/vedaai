@@ -16,8 +16,8 @@ export default function MobileBottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-30">
-      <div className="flex items-center justify-around py-2">
+    <nav className="lg:hidden fixed bottom-4 left-4 right-4 bg-gray-900 rounded-2xl shadow-lg z-30">
+      <div className="flex items-center justify-around py-3">
         {tabs.map((tab) => {
           const isActive = tab.href === '/' && pathname === '/';
           return (
@@ -27,11 +27,11 @@ export default function MobileBottomNav() {
               scroll={false}
               className={cn(
                 'flex flex-col items-center gap-1 py-1 px-3',
-                isActive ? 'text-gray-900' : 'text-gray-400'
+                isActive ? 'text-white font-bold' : 'text-gray-400'
               )}
             >
-              <tab.icon className="w-5 h-5" />
-              <span className="text-xs">{tab.label}</span>
+              <tab.icon className={cn('w-5 h-5', isActive && 'stroke-[2.5]')} />
+              <span className="text-[10px]">{tab.label}</span>
             </Link>
           );
         })}

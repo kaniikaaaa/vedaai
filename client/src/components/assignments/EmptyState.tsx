@@ -1,10 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 
 export default function EmptyState() {
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-4">
-      <img src="/empty-illustration.svg" alt="No assignments" className="w-96 h-88 -mb-6" />
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] px-4">
+      <img src="/empty-illustration.svg" alt="No assignments" className="w-64 sm:w-80 lg:w-96 -mb-4" />
       <h2 className="text-xl font-semibold text-gray-900 mb-2">No assignments yet</h2>
       <p className="text-sm text-gray-500 text-center max-w-md mb-8 leading-relaxed">
         Create your first assignment to start collecting and grading student submissions. You can set up rubrics, define marking criteria, and let AI assist with grading.
