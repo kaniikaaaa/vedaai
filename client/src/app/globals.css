@@ -1,13 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-orange-500: #F97316;
-  --color-orange-600: #EA580C;
-  --color-dark: #1F2937;
-  --color-gray-bg: #F3F4F6;
-  --color-gray-border: #E5E7EB;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-orange-500: #FF5623;
+  --color-orange-600: #E04D1F;
+  --font-sans: var(--font-sans);
 }
 
 * {
@@ -16,16 +12,9 @@
 }
 
 body {
-  background: #F3F4F6;
-  color: #1F2937;
+  background: linear-gradient(180deg, #EEEEEE 0%, #DADADA 100%);
+  background-attachment: fixed;
+  color: #303030;
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
-}
-
-/* Hide scrollbar for sidebar */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  letter-spacing: -0.04em;
 }

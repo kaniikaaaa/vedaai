@@ -2,98 +2,90 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  Home,
-  Users,
-  FileText,
-  Sparkles,
-  BookOpen,
-  Settings,
-  Plus,
-  Flame,
-} from 'lucide-react';
+import { Home, Users, FileText, Sparkles, BookOpen, Settings, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { APP_CONFIG } from '@/lib/constants';
+import { useAssignmentStore } from '@/stores/assignmentStore';
+import VedaLogo from '@/components/ui/VedaLogo';
 
 const navItems = [
   { label: 'Home', href: '/', icon: Home },
   { label: 'My Groups', href: '#', icon: Users },
-  { label: 'Assignments', href: '/', icon: FileText, badge: true },
+  { label: 'Assignments', href: '/', icon: FileText, showBadge: true },
   { label: 'AI Teacher\'s Toolkit', href: '#', icon: Sparkles },
   { label: 'My Library', href: '#', icon: BookOpen },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const assignmentCount = useAssignmentStore(s => s.assignments.length);
 
   return (
-    <aside className="hidden lg:flex flex-col w-60 h-screen bg-white border-r border-gray-200 fixed left-0 top-0 z-30">
-      {/* Logo */}
-      <div className="flex items-center gap-2 px-5 py-5">
-        <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
-          <Flame className="w-5 h-5 text-white" />
+    <div className="hidden lg:block fixed left-0 top-0 h-screen w-[304px] p-3 z-30">
+      <aside
+        className="flex flex-col h-full bg-white rounded-2xl overflow-hidden p-6"
+        style={{ boxShadow: '0px 16px 48px rgba(0, 0, 0, 0.12), 0px 32px 48px rgba(0, 0, 0, 0.2)' }}
+      >
+        <div className="mb-8">
+          <VedaLogo />
         </div>
-        <span className="text-xl font-bold text-gray-900">VedaAI</span>
-      </div>
 
-      {/* Create Button */}
-      <div className="px-4 mb-4">
-        <Link
-          href="/create"
-          className="flex items-center justify-center gap-2 w-full py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium text-sm transition-colors"
-        >
-          <Plus className="w-4 h-4" />
-          Create Assignment
-        </Link>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 px-3 space-y-1">
-        {navItems.map((item) => {
-          const isActive = item.href === '/' && (pathname === '/' || pathname === '');
-          return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors',
-                isActive
-                  ? 'bg-gray-100 text-gray-900 font-medium'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-              )}
-            >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
-              {item.badge && (
-                <span className="ml-auto bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-                  02
-                </span>
-              )}
-            </Link>
-          );
-        })}
-      </nav>
-
-      {/* Settings */}
-      <div className="px-3 mb-2">
-        <Link
-          href="#"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-gray-50"
-        >
-          <Settings className="w-5 h-5" />
-          Settings
-        </Link>
-      </div>
-
-      {/* School Card */}
-      <div className="mx-4 mb-4 p-3 bg-gray-50 rounded-xl flex items-center gap-3 border border-gray-100">
-        <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-lg">
-          🏫
+        <div className="mb-6">
+          <button
+            onClick={() => window.location.href = '/create'}
+            className="flex items-center justify-center gap-2 w-full py-2.5 text-base font-medium text-white rounded-full transition-colors tracking-[-0.04em] border-2 border-[#FF5623]"
+            style={{
+              background: '#272727',
+              boxShadow: '0px 16px 48px rgba(255, 255, 255, 0.12), 0px 32px 48px rgba(255, 255, 255, 0.2), inset 0px -1px 3.5px rgba(177, 177, 177, 0.6), inset 0px 0px 34.5px rgba(255, 255, 255, 0.25)',
+            }}
+          >
+            <Plus className="w-5 h-5" />
+            Create Assignment
+          </button>
         </div>
-        <div>
-          <p className="text-sm font-medium text-gray-900">Delhi Public School</p>
-          <p className="text-xs text-gray-500">Bokaro Steel City</p>
+
+        <nav className="flex-1 space-y-2">
+          {navItems.map((item) => {
+            const isActive = item.label === 'Assignments' && (pathname === '/' || pathname === '');
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                scroll={false}
+                className={cn(
+                  'flex items-center gap-2 px-3 py-2 rounded-lg text-base tracking-[-0.04em] transition-colors',
+                  isActive
+                    ? 'bg-[#F0F0F0] text-[#303030] font-medium'
+                    : 'text-[#5E5E5ECC] hover:bg-[#F0F0F0]'
+                )}
+              >
+                <item.icon className="w-5 h-5" />
+                <span>{item.label}</span>
+                {item.showBadge && assignmentCount > 0 && (
+                  <span className="ml-auto bg-[#FF5623] text-white text-xs min-w-5 h-5 flex items-center justify-center rounded-lg font-medium px-1.5">
+                    {assignmentCount}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="mt-auto">
+          <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-base text-[#5E5E5ECC] hover:bg-[#F0F0F0] w-full tracking-[-0.04em] mb-2">
+            <Settings className="w-5 h-5" />
+            Settings
+          </button>
+
+          <div className="p-3 bg-[#F0F0F0] rounded-2xl flex items-center gap-2">
+            <img src="/school-avatar.svg" alt="School" className="w-14 h-14 rounded-full object-cover" />
+            <div>
+              <p className="text-base font-bold text-[#303030] tracking-[-0.04em]">{APP_CONFIG.schoolName}</p>
+              <p className="text-sm text-[#5E5E5E] tracking-[-0.04em]">{APP_CONFIG.schoolLocation}</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </div>
   );
 }

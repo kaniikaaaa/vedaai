@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import type { QuestionTypeConfig } from '@/types';
 
+const getToday = () => new Date().toISOString().split('T')[0];
+
 const DEFAULT_QUESTION_TYPES: QuestionTypeConfig[] = [
   { type: 'Multiple Choice Questions', count: 4, marks: 1 },
   { type: 'Short Questions', count: 3, marks: 2 },
@@ -17,7 +19,6 @@ interface CreateStore {
 
   setFile: (file: File | null) => void;
   setDueDate: (date: string) => void;
-  setQuestionTypes: (types: QuestionTypeConfig[]) => void;
   updateQuestionType: (index: number, field: keyof QuestionTypeConfig, value: string | number) => void;
   addQuestionType: () => void;
   removeQuestionType: (index: number) => void;
@@ -30,15 +31,13 @@ interface CreateStore {
 
 export const useCreateStore = create<CreateStore>((set, get) => ({
   file: null,
-  dueDate: '',
+  dueDate: getToday(),
   questionTypes: [...DEFAULT_QUESTION_TYPES],
   additionalInstructions: '',
   isSubmitting: false,
 
   setFile: (file) => set({ file }),
   setDueDate: (dueDate) => set({ dueDate }),
-  setQuestionTypes: (questionTypes) => set({ questionTypes }),
-
   updateQuestionType: (index, field, value) => {
     const types = [...get().questionTypes];
     types[index] = { ...types[index], [field]: value };
@@ -61,7 +60,7 @@ export const useCreateStore = create<CreateStore>((set, get) => ({
 
   reset: () => set({
     file: null,
-    dueDate: '',
+    dueDate: getToday(),
     questionTypes: [...DEFAULT_QUESTION_TYPES],
     additionalInstructions: '',
     isSubmitting: false,

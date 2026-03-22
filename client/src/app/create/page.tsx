@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useCreateStore } from '@/stores/createStore';
 import FileUpload from '@/components/create/FileUpload';
 import QuestionTypesTable from '@/components/create/QuestionTypesTable';
+import PageHeader from '@/components/ui/PageHeader';
 import * as api from '@/lib/api';
 
 export default function CreateAssignmentPage() {
@@ -60,49 +61,40 @@ export default function CreateAssignmentPage() {
 
   return (
     <div className="p-4 lg:p-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-          <h1 className="text-xl font-bold text-gray-900">Create Assignment</h1>
-        </div>
-        <p className="text-sm text-gray-500 ml-5">Set up a new assignment for your students.</p>
-      </div>
+      <PageHeader title="Create Assignment" subtitle="Set up a new assignment for your students." />
 
       {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="h-1.5 bg-gray-200 rounded-full">
-          <div className="h-1.5 bg-gray-900 rounded-full w-full transition-all" />
-        </div>
+      <div className="mb-8 flex items-center gap-3">
+        <div className="flex-1 h-[5px] bg-[#5E5E5E] rounded-full" />
+        <div className="flex-1 h-[5px] bg-[#DADADA] rounded-full" />
       </div>
 
       {/* Form Card */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-1">Assignment Details</h2>
-        <p className="text-sm text-gray-500 mb-6">Basic information about your assignment.</p>
+      <div className="bg-white/50 rounded-[32px] p-6 lg:p-8">
+        <h2 className="text-xl font-bold text-[#303030] mb-0.5 tracking-[-0.04em]">Assignment Details</h2>
+        <p className="text-sm text-[#5E5E5ECC] mb-8 tracking-[-0.04em]">Basic information about your assignment.</p>
 
         {/* File Upload */}
-        <div className="mb-6">
+        <div className="mb-4">
           <FileUpload file={file} onFileChange={setFile} />
         </div>
 
         {/* Due Date */}
-        <div className="mb-6">
-          <label className="text-sm font-medium text-gray-900 block mb-2">Due Date</label>
+        <div className="mb-4">
+          <label className="text-base font-bold text-[#303030] block mb-2 tracking-[-0.04em]">Due Date</label>
           <div className="relative">
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 appearance-none"
-              placeholder="Choose a date/time"
+              className="w-full px-4 py-2.5 text-base font-medium text-[#303030] placeholder:text-[#A9A9A9] border-[1.25px] border-[#DADADA] rounded-full focus:outline-none focus:ring-2 focus:ring-[#FF5623] appearance-none tracking-[-0.04em]"
             />
-            <CalendarDays className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            <CalendarDays className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-[#2B2B2B] pointer-events-none" />
           </div>
         </div>
 
         {/* Question Types */}
-        <div className="mb-6">
+        <div className="mb-4">
           <QuestionTypesTable
             questionTypes={questionTypes}
             onUpdate={updateQuestionType}
@@ -114,8 +106,8 @@ export default function CreateAssignmentPage() {
         </div>
 
         {/* Additional Information */}
-        <div className="mb-6">
-          <label className="text-sm font-medium text-gray-900 block mb-2">
+        <div className="mb-4">
+          <label className="text-base font-bold text-[#303030] block mb-2 tracking-[-0.04em]">
             Additional Information (For better output)
           </label>
           <div className="relative">
@@ -124,29 +116,31 @@ export default function CreateAssignmentPage() {
               onChange={(e) => setAdditionalInstructions(e.target.value)}
               placeholder="e.g. Generate a question paper for 3 hour exam duration..."
               rows={3}
-              className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
+              className="w-full px-4 py-4 text-sm font-medium text-[#303030] placeholder:text-[#30303099] bg-white/25 border-[1.25px] border-dashed border-[#DADADA] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF5623] resize-none tracking-[-0.04em]"
             />
-            <Mic className="absolute right-3 bottom-3 w-4 h-4 text-gray-400" />
+            <div className="absolute right-3 bottom-3 w-9 h-9 bg-[#F0F0F0] rounded-full flex items-center justify-center">
+              <Mic className="w-4 h-4 text-[#303030]" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between mt-6">
+      <div className="flex items-center justify-between mt-8">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-1 px-6 py-3 text-base font-medium text-[#303030] bg-white rounded-[48px] hover:bg-[#F0F0F0] transition-colors tracking-[-0.04em]"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-5 h-5" />
           Previous
         </button>
         <button
           onClick={handleSubmit}
           disabled={isSubmitting}
-          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-1 px-6 py-3 text-base font-medium text-white bg-[#181818] rounded-[48px] hover:bg-[#272727] transition-colors disabled:opacity-50 disabled:cursor-not-allowed tracking-[-0.04em]"
         >
-          {isSubmitting ? 'Creating...' : 'Next'}
-          <ArrowRight className="w-4 h-4" />
+          {isSubmitting ? 'Creating...' : 'Continue'}
+          <ArrowRight className="w-5 h-5" />
         </button>
       </div>
     </div>

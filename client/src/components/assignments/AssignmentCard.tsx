@@ -26,46 +26,41 @@ export default function AssignmentCard({ assignment, onDelete }: AssignmentCardP
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const title = assignment.additionalInstructions
-    ? assignment.additionalInstructions.slice(0, 50) + (assignment.additionalInstructions.length > 50 ? '...' : '')
-    : `Assignment - ${assignment.totalQuestions} Questions`;
+  const title = assignment.generatedPaper?.title
+    || (assignment.additionalInstructions
+      ? assignment.additionalInstructions.slice(0, 50) + (assignment.additionalInstructions.length > 50 ? '...' : '')
+      : `Assignment - ${assignment.totalQuestions} Questions`);
 
   const assignedDate = format(new Date(assignment.createdAt), 'dd-MM-yyyy');
   const dueDate = format(new Date(assignment.dueDate), 'dd-MM-yyyy');
 
   return (
-    <div className="bg-white rounded-xl p-5 border border-gray-100 hover:shadow-md transition-shadow relative">
+    <div className="bg-white/75 lg:bg-white rounded-3xl p-5 lg:p-6 hover:shadow-md transition-all relative">
       <div className="flex items-start justify-between">
         <h3
-          className="text-base font-semibold text-gray-900 cursor-pointer hover:text-orange-600 transition-colors pr-8"
+          className="text-lg font-bold lg:text-2xl lg:font-extrabold leading-[120%] tracking-[-0.04em] text-[#303030] cursor-pointer hover:text-[#FF5623] transition-colors pr-8"
           onClick={() => router.push(`/assignment/${assignment._id}`)}
         >
           {title}
         </h3>
         <div className="relative" ref={menuRef}>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <MoreVertical className="w-5 h-5 text-gray-400" />
+          <button onClick={() => setMenuOpen(!menuOpen)} className="p-1 hover:bg-[#F0F0F0] rounded-lg transition-colors">
+            <MoreVertical className="w-6 h-6 text-black lg:text-[#A9A9A9]" />
           </button>
           {menuOpen && (
-            <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-10 min-w-[140px]">
+            <div
+              className="absolute right-0 top-10 bg-white rounded-2xl p-2 z-10 w-[140px] flex flex-col gap-1"
+              style={{ boxShadow: '0px 16px 48px rgba(0, 0, 0, 0.2), 0px 32px 48px rgba(0, 0, 0, 0.05)' }}
+            >
               <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  router.push(`/assignment/${assignment._id}`);
-                }}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                onClick={() => { setMenuOpen(false); router.push(`/assignment/${assignment._id}`); }}
+                className="w-full text-left px-2 py-1.5 text-sm font-medium text-[#303030] hover:bg-[#F0F0F0] rounded-lg tracking-[-0.04em]"
               >
                 View Assignment
               </button>
               <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  onDelete(assignment._id);
-                }}
-                className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                onClick={() => { setMenuOpen(false); onDelete(assignment._id); }}
+                className="w-full text-left px-2 py-1.5 text-sm font-medium text-[#C53535] bg-[#F6F6F6] hover:bg-[#EEEEEE] rounded-lg tracking-[-0.04em]"
               >
                 Delete
               </button>
@@ -74,33 +69,10 @@ export default function AssignmentCard({ assignment, onDelete }: AssignmentCardP
         </div>
       </div>
 
-      <div className="flex items-center gap-4 mt-4 text-sm text-gray-500">
-        <span>Assigned on: {assignedDate}</span>
-        <span>Due: {dueDate}</span>
+      <div className="flex items-center justify-between mt-8 lg:mt-10 text-base text-[#303030] tracking-[-0.04em]">
+        <span><strong>Assigned on :</strong> {assignedDate}</span>
+        <span><strong>Due :</strong> {dueDate}</span>
       </div>
-
-      {/* Status indicator */}
-      {assignment.status === 'processing' && (
-        <div className="mt-3">
-          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-            Generating...
-          </span>
-        </div>
-      )}
-      {assignment.status === 'completed' && (
-        <div className="mt-3">
-          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-            Completed
-          </span>
-        </div>
-      )}
-      {assignment.status === 'failed' && (
-        <div className="mt-3">
-          <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">
-            Failed
-          </span>
-        </div>
-      )}
     </div>
   );
 }

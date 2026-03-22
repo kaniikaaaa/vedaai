@@ -5,8 +5,9 @@ export function buildSystemPrompt(): string {
 
 Your output must be a valid JSON object with exactly this structure:
 {
-  "message": "A brief friendly message about the generated paper (1-2 sentences)",
+  "message": "A warm, contextual message referencing the school name, subject, class/grade, and topic you inferred. Example: 'Certainly! Here are customized Question Papers for your Delhi Public School Grade 8 Science classes on the topic of Electricity.'",
   "paper": {
+    "title": "A short title for the paper (e.g., 'Quiz on Electricity', 'Math Unit Test')",
     "schoolName": "School name (infer from context or use a reasonable default)",
     "subject": "Subject name (infer from the content/instructions)",
     "class": "Class/Grade (infer from context)",
@@ -38,6 +39,9 @@ Rules:
 - Infer the school name, subject, class/grade from the uploaded content and additional instructions
 - Create questions appropriate for the specified class level
 - Ensure questions cover different difficulty levels
+- Generate unique, creative questions each time — avoid generic or commonly used questions
+- Use diverse topics within the subject area
+- Vary question phrasing, scenarios, and complexity across generations
 - MCQ options should have exactly 4 choices with the correct one marked with (*)
 - Include clear section instructions
 - Answer key must cover ALL questions
@@ -57,6 +61,8 @@ export function buildUserPrompt(
   const totalMarks = questionTypes.reduce((sum, qt) => sum + qt.count * qt.marks, 0);
 
   let prompt = `Generate a question paper with the following configuration:
+
+School: Delhi Public School, Bokaro Steel City
 
 Question Distribution:
 ${questionConfig}

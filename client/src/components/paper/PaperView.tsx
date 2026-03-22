@@ -1,6 +1,10 @@
-'use client';
-
 import type { GeneratedPaper } from '@/types';
+
+const DIFFICULTY_LABELS: Record<string, string> = {
+  easy: 'Easy',
+  medium: 'Moderate',
+  hard: 'Challenging',
+};
 
 interface PaperViewProps {
   paper: GeneratedPaper;
@@ -8,68 +12,77 @@ interface PaperViewProps {
 
 export default function PaperView({ paper }: PaperViewProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8 max-w-3xl">
+    <div className="bg-white rounded-[32px] p-6 lg:p-8" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
       {/* School Header */}
-      <div className="text-center mb-6 pb-4 border-b-2 border-gray-800">
-        <h1 className="text-xl font-bold text-gray-900 mb-1">{paper.schoolName}</h1>
-        <p className="text-sm text-gray-700">Subject: {paper.subject}</p>
-        <p className="text-sm text-gray-700">Class: {paper.class}</p>
+      <div className="text-center mb-6 pb-4 border-b-2 border-[#303030]">
+        <h1 className="text-2xl lg:text-[32px] font-bold text-[#303030] leading-[160%] tracking-[-0.04em]">{paper.schoolName}</h1>
+        <p className="text-lg font-semibold text-[#303030] tracking-[-0.04em]"><strong>Subject:</strong> {paper.subject}</p>
+        <p className="text-lg font-semibold text-[#303030] tracking-[-0.04em]"><strong>Class:</strong> {paper.class}</p>
       </div>
 
       {/* Meta */}
-      <div className="flex justify-between text-sm text-gray-700 mb-4">
-        <span>Time Allowed: {paper.time}</span>
-        <span>Maximum Marks: {paper.maxMarks}</span>
+      <div className="flex justify-between text-lg font-semibold text-[#303030] mb-4 tracking-[-0.04em]">
+        <span><strong>Time Allowed:</strong> {paper.time}</span>
+        <span><strong>Maximum Marks:</strong> {paper.maxMarks}</span>
       </div>
 
       {/* Instructions */}
       {paper.instructions && paper.instructions.length > 0 && (
-        <div className="mb-6 p-3 bg-gray-50 border-l-3 border-gray-800 text-sm text-gray-600">
-          <p className="font-medium text-gray-900 mb-1">Instructions:</p>
+        <div className="mb-4 text-lg font-semibold text-[#303030] tracking-[-0.04em]">
           {paper.instructions.map((inst, i) => (
-            <p key={i} className="italic">• {inst}</p>
+            <p key={i}>{inst}</p>
           ))}
         </div>
       )}
 
+      {/* Student Info Section */}
+      <div className="mb-6 text-lg font-semibold text-[#303030] tracking-[-0.04em] space-y-0">
+        <p>Name: ______________________</p>
+        <p>Roll Number: ________________</p>
+        <p>Class: {paper.class} Section: __________</p>
+      </div>
+
       {/* Sections */}
       {paper.sections.map((section, si) => (
         <div key={si} className="mb-8">
-          <h3 className="text-base font-bold text-gray-900 mb-1 pb-1 border-b border-gray-300">
+          <h3 className="text-2xl font-semibold text-[#303030] text-center mb-2 tracking-[-0.04em]">
             {section.title}
           </h3>
-          <p className="text-sm text-gray-500 italic mb-4">{section.instruction}</p>
+          <p className="text-lg font-semibold text-[#303030] mb-4 tracking-[-0.04em]">{section.instruction}</p>
 
-          <div className="space-y-4">
-            {section.questions.map((q) => (
-              <div key={q.number} className="text-sm">
-                <p className="text-gray-800">
-                  <strong>{q.number}.</strong> {q.text}{' '}
-                  <span className="text-gray-400 text-xs">[{q.marks} Marks]</span>
-                </p>
-                {q.options && q.options.length > 0 && (
-                  <div className="grid grid-cols-2 gap-1 mt-2 ml-5 text-gray-600 text-xs">
-                    {q.options.map((opt, oi) => (
-                      <span key={oi}>({String.fromCharCode(97 + oi)}) {opt}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="text-base font-normal text-[#303030] leading-[240%] tracking-[-0.04em]">
+            {section.questions.map((q) => {
+              const diffLabel = q.difficulty ? DIFFICULTY_LABELS[q.difficulty] : null;
+              return (
+                <div key={q.number}>
+                  <p>
+                    {diffLabel && <span>[{diffLabel}]</span>}{' '}
+                    {q.text} [{q.marks} Marks]
+                  </p>
+                  {q.options && q.options.length > 0 && (
+                    <div className="grid grid-cols-2 gap-x-4 ml-6 leading-[200%]">
+                      {q.options.map((opt, oi) => (
+                        <span key={oi}>({String.fromCharCode(97 + oi)}) {opt}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
 
       {/* End Divider */}
-      <div className="text-center text-sm font-bold text-gray-500 my-6 pt-4 border-t border-gray-300">
-        --- End of Question Paper ---
+      <div className="text-center text-lg font-semibold text-[#303030] my-6 pt-4 border-t border-[#303030] tracking-[-0.04em]">
+        End of Question Paper
       </div>
 
       {/* Answer Key */}
       {paper.answerKey && paper.answerKey.length > 0 && (
-        <div className="mt-6 pt-6 border-t-2 border-gray-800">
-          <h3 className="text-lg font-bold text-gray-900 text-center mb-4">Answer Key</h3>
-          <div className="space-y-2 text-sm text-gray-700">
+        <div className="mt-6 pt-6 border-t-2 border-[#303030]">
+          <h3 className="text-2xl font-bold text-[#303030] text-center mb-4 tracking-[-0.04em]">Answer Key</h3>
+          <div className="text-base font-normal text-[#303030] leading-[240%] tracking-[-0.04em]">
             {paper.answerKey.map((a) => (
               <p key={a.questionNumber}>
                 <strong>{a.questionNumber}.</strong> {a.answer}
