@@ -51,8 +51,23 @@ export default function AssignmentDetailPage() {
     }
   };
 
-  const handleDownload = () => {
-    window.open(api.getPDFUrl(id), '_blank');
+  const handleDownload = async () => {
+    if (!paper) return;
+    try {
+      const { pdf } = await import('@react-pdf/renderer');
+      const { default: PaperPDF } = await import('@/components/paper/PaperPDF');
+      const blob = await pdf(<PaperPDF paper={paper} />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `question-paper-${id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch {
+      toast.error('Failed to generate PDF');
+    }
   };
 
   if (loading) {

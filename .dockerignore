@@ -1,0 +1,15 @@
+node_modules
+client/node_modules
+server/node_modules
+client/.next
+server/dist
+.env
+server/.env
+*.log
+.DS_Store
+mongo-data
+design
+BRANDING.md
+test-material.txt
+.git
+.mcp.json

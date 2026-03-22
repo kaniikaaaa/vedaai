@@ -31,7 +31,3 @@ export async function deleteAssignment(id: string): Promise<void> {
 export async function regenerateAssignment(id: string): Promise<Assignment> {
   return request(`/assignments/${id}/regenerate`, { method: 'POST' });
 }
-
-export function getPDFUrl(id: string): string {
-  return `${API_URL}/assignments/${id}/pdf`;
-}

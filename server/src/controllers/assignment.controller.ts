@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express';
 import { Assignment } from '../models/assignment.model.js';
 import { paperQueue } from '../jobs/queue.js';
-import { generatePDF } from '../services/pdf.service.js';
 
 export async function createAssignment(req: Request, res: Response) {
   try {
@@ -70,29 +69,6 @@ export async function deleteAssignment(req: Request, res: Response) {
   }
 }
 
-export async function downloadPDF(req: Request, res: Response) {
-  try {
-    const assignment = await Assignment.findById(req.params.id);
-    if (!assignment) {
-      return res.status(404).json({ error: 'Assignment not found' });
-    }
-    if (!assignment.generatedPaper) {
-      return res.status(400).json({ error: 'Paper not yet generated' });
-    }
-
-    const pdfBuffer = await generatePDF(assignment.generatedPaper);
-
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="question-paper-${assignment._id}.pdf"`,
-      'Content-Length': pdfBuffer.length.toString(),
-    });
-    res.send(pdfBuffer);
-  } catch (error) {
-    console.error('PDF generation error:', error);
-    res.status(500).json({ error: 'Failed to generate PDF' });
-  }
-}
 
 export async function regenerateAssignment(req: Request, res: Response) {
   try {
