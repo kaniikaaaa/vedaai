@@ -12,7 +12,7 @@ interface PaperViewProps {
 
 export default function PaperView({ paper }: PaperViewProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8 max-w-3xl">
+    <div className="bg-white rounded-xl border border-gray-200 p-6 lg:p-8">
       <div className="text-center mb-6 pb-4 border-b-2 border-gray-800">
         <h1 className="text-xl font-bold text-gray-900 mb-1">{paper.schoolName}</h1>
         <p className="text-sm text-gray-700"><strong>Subject:</strong> {paper.subject}</p>

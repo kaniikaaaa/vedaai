@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { Assignment } from '@/types';
 import AssignmentCard from './AssignmentCard';
 import DeleteModal from '@/components/ui/DeleteModal';
+import PageHeader from '@/components/ui/PageHeader';
 import Skeleton from '@/components/ui/Skeleton';
 
 interface AssignmentListProps {
@@ -42,14 +43,7 @@ export default function AssignmentList({
 
   return (
     <div className="p-4 lg:p-6">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-          <h1 className="text-xl font-bold text-gray-900">Assignments</h1>
-        </div>
-        <p className="text-sm text-gray-500 ml-5">Manage and create assignments for your classes.</p>
-      </div>
+      <PageHeader title="Assignments" subtitle="Manage and create assignments for your classes." />
 
       {/* Toolbar */}
       <div className="flex items-center justify-between gap-4 mb-6">

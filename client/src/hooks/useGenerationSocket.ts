@@ -3,14 +3,13 @@
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useGenerationStore } from '@/stores/generationStore';
-
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:5001';
+import { API_BASE } from '@/lib/constants';
 
 export function useGenerationSocket(assignmentId: string) {
   const { setAll } = useGenerationStore();
 
   useEffect(() => {
-    const socket = io(SOCKET_URL, { transports: ['websocket', 'polling'] });
+    const socket = io(API_BASE, { transports: ['websocket', 'polling'] });
 
     socket.on('connect', () => { socket.emit('join', assignmentId); });
     socket.on('assignment:status', (data) => { setAll({ status: data.status }); });

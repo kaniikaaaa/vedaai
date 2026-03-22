@@ -51,6 +51,11 @@ export async function generatePaper(
   const systemPrompt = buildSystemPrompt();
   const userPrompt = buildUserPrompt(questionTypes, additionalInstructions, fileContent);
 
+  console.log('\n=== LLM REQUEST ===');
+  console.log('System prompt length:', systemPrompt.length, 'chars');
+  console.log('User prompt:\n', userPrompt);
+  console.log('===================\n');
+
   const response = await openai.chat.completions.create({
     model: 'gpt-4o',
     messages: [
@@ -58,11 +63,17 @@ export async function generatePaper(
       { role: 'user', content: userPrompt },
     ],
     response_format: { type: 'json_object' },
-    temperature: 0.7,
+    temperature: 0.9,
     max_tokens: 4096,
   });
 
   const content = response.choices[0]?.message?.content;
+  console.log('\n=== LLM RESPONSE ===');
+  console.log('Tokens used:', response.usage);
+  console.log('Response length:', content?.length, 'chars');
+  console.log('Raw response:\n', content?.slice(0, 500), '...');
+  console.log('====================\n');
+
   if (!content) {
     throw new Error('No response from AI');
   }

@@ -36,7 +36,7 @@ export default function AssignmentCard({ assignment, onDelete }: AssignmentCardP
   const dueDate = format(new Date(assignment.dueDate), 'dd-MM-yyyy');
 
   return (
-    <div className={cn('rounded-xl p-5 border border-gray-100 hover:shadow-md transition-all relative', menuOpen ? 'bg-amber-50' : 'bg-white')}>
+    <div className={cn('rounded-xl p-5 hover:shadow-md transition-all relative', menuOpen ? 'bg-amber-50 border-2 border-amber-400' : 'bg-white border border-gray-100')}>
       <div className="flex items-start justify-between">
         <h3 className="text-base font-semibold text-gray-900 cursor-pointer hover:text-orange-600 transition-colors pr-8" onClick={() => router.push(`/assignment/${assignment._id}`)}>
           {title}

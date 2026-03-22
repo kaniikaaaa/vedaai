@@ -1,6 +1,7 @@
 import type { Assignment } from '@/types';
+import { API_BASE } from '@/lib/constants';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+const API_URL = `${API_BASE}/api`;
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, options);
@@ -20,15 +21,7 @@ export async function fetchAssignment(id: string): Promise<Assignment> {
 }
 
 export async function createAssignment(formData: FormData): Promise<Assignment> {
-  const res = await fetch(`${API_URL}/assignments`, {
-    method: 'POST',
-    body: formData,
-  });
-  if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: 'Request failed' }));
-    throw new Error(error.error || 'Failed to create assignment');
-  }
-  return res.json();
+  return request('/assignments', { method: 'POST', body: formData });
 }
 
 export async function deleteAssignment(id: string): Promise<void> {

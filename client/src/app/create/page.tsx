@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useCreateStore } from '@/stores/createStore';
 import FileUpload from '@/components/create/FileUpload';
 import QuestionTypesTable from '@/components/create/QuestionTypesTable';
+import PageHeader from '@/components/ui/PageHeader';
 import * as api from '@/lib/api';
 
 export default function CreateAssignmentPage() {
@@ -60,19 +61,12 @@ export default function CreateAssignmentPage() {
 
   return (
     <div className="p-4 lg:p-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 bg-green-500 rounded-full" />
-          <h1 className="text-xl font-bold text-gray-900">Create Assignment</h1>
-        </div>
-        <p className="text-sm text-gray-500 ml-5">Set up a new assignment for your students.</p>
-      </div>
+      <PageHeader title="Create Assignment" subtitle="Set up a new assignment for your students." />
 
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="h-1.5 bg-gray-200 rounded-full">
-          <div className="h-1.5 bg-gray-900 rounded-full w-full transition-all" />
+          <div className="h-1.5 bg-gray-900 rounded-full w-1/2 transition-all" />
         </div>
       </div>
 
@@ -135,7 +129,7 @@ export default function CreateAssignmentPage() {
       <div className="flex items-center justify-between mt-6">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Previous
@@ -143,7 +137,7 @@ export default function CreateAssignmentPage() {
         <button
           onClick={handleSubmit}
           disabled={isSubmitting}
-          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gray-900 rounded-full hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Creating...' : 'Next'}
           <ArrowRight className="w-4 h-4" />

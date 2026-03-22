@@ -19,7 +19,6 @@ interface CreateStore {
 
   setFile: (file: File | null) => void;
   setDueDate: (date: string) => void;
-  setQuestionTypes: (types: QuestionTypeConfig[]) => void;
   updateQuestionType: (index: number, field: keyof QuestionTypeConfig, value: string | number) => void;
   addQuestionType: () => void;
   removeQuestionType: (index: number) => void;
@@ -39,8 +38,6 @@ export const useCreateStore = create<CreateStore>((set, get) => ({
 
   setFile: (file) => set({ file }),
   setDueDate: (dueDate) => set({ dueDate }),
-  setQuestionTypes: (questionTypes) => set({ questionTypes }),
-
   updateQuestionType: (index, field, value) => {
     const types = [...get().questionTypes];
     types[index] = { ...types[index], [field]: value };
