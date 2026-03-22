@@ -19,7 +19,7 @@ sleep 2
 # Start Express backend
 echo "Starting Express backend..."
 cd /app/server
-NODE_ENV=production node dist/server.js &
+PORT=5001 NODE_ENV=production node dist/server.js &
 
 # Start Next.js frontend
 echo "Starting Next.js frontend..."
