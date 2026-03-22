@@ -1,9 +1,12 @@
 import { Queue, Worker } from 'bullmq';
 import { config } from '../config/index.js';
 
+const redisUrl = new URL(config.redisUrl);
 const connection = {
-  host: new URL(config.redisUrl).hostname || 'localhost',
-  port: parseInt(new URL(config.redisUrl).port || '6379', 10),
+  host: redisUrl.hostname || 'localhost',
+  port: parseInt(redisUrl.port || '6379', 10),
+  password: redisUrl.password || undefined,
+  tls: redisUrl.protocol === 'rediss:' ? {} : undefined,
   maxRetriesPerRequest: null,
 };
 

@@ -7,8 +7,9 @@ let io: IOServer;
 export function initSocket(httpServer: HTTPServer): IOServer {
   io = new IOServer(httpServer, {
     cors: {
-      origin: config.clientUrl,
+      origin: config.clientUrl.split(',').map(s => s.trim()),
       methods: ['GET', 'POST'],
+      credentials: true,
     },
   });
 

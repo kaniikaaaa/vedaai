@@ -7,7 +7,10 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
-app.use(cors({ origin: config.clientUrl }));
+app.use(cors({
+  origin: config.clientUrl.split(',').map(s => s.trim()),
+  credentials: true,
+}));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
